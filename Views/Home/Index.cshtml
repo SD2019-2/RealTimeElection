@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">
+
+    <title>Eleição</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-6">
+            <canvas id="color-chart" width="1000" height="500"></canvas>
+        </div>
+
+        <div class="col-6">
+            <div>
+                <input type="text" placeholder="Insira seu nome" id="nome-usuario">
+            </div>
+            <div>
+                <button id="btn-vermelho" class="button" value="0" style="color:red;"> Vermelho </button>
+            </div>
+            <div>
+                <button id="btn-azul" class="button"  value="1" style="color:blue;"> Azul </button>
+            </div>
+            <div>
+                <button id="btn-amarelo" class="button" value="2" style="color:yellow;"> Amarelo </button>
+            </div>
+            <div>
+                <button id="btn-verde" class="button" value="3" style="color:green;"> Verde </button>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-2">User</div>
+            <div class="col-4"><input type="text" id="userInput" /></div>
+        </div>
+        <div class="row">
+            <div class="col-2">Message</div>
+            <div class="col-4"><input type="text" id="messageInput" /></div>
+        </div>
+        <div class="row">&nbsp;</div>
+        <div class="row">
+            <div class="col-6">
+                <input type="button" id="sendButton" value="Send Message" />
+            </div>
+        </div>*@
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+    </div>
+
+    @* LISTA DE VOTOS *@
+    <div class="row">
+        <div class="col-12">
+            <ul id="list-vote"></ul>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/site.js"></script>
+
+
+</body>
+
+
