@@ -1,6 +1,4 @@
-﻿//"use strict";
-
-//DEFINIÇÃO INICIAL DO CHART
+﻿//DEFINIÇÃO INICIAL DO CHART
 let ctx = document.getElementById('color-chart').getContext('2d');
 let colorChart = new Chart(ctx, {
     type: 'bar',
@@ -57,53 +55,54 @@ function colorValue(colorCode) {
 
 //CONEXÃO COM O HUB SIGNAL
 let connection = new signalR.HubConnectionBuilder().withUrl("/electionhub").build();
-document.getElementsByClassName("button").disabled = true;
+document.getElementsByClassName("btn").disabled = true;
 connection.start().then(function () {
-    document.getElementsByClassName("button").disabled = false;
-}).catch(function () {
-    return console.log("FALHOU");
+    document.getElementsByClassName("btn").disabled = false;
+    connection.invoke("UpdateChart"); //Recebo o status do chart
 });
 
-//RECEIVE HUB
-connection.on("ReceiveVote", function (user, vote) {
+//----------------------------------------------------------------------------------------------------------------------------------------//
 
+//RECEIVE VOTE 
+connection.on("ReceiveVote", function (user, vote) {
     var voteDescription = document.createElement("li");
     voteDescription.textContent = user + " votou na cor " + colorValue(vote);
-    document.getElementById("list-vote").appendChild(voteDescription);
+    document.getElementById("list-interactions").appendChild(voteDescription);
 
     //ATUALIZO CHART
     colorChart.data.datasets[0].data[vote] = colorChart.data.datasets[0].data[vote] + 1
     colorChart.update();
 });
 
-//SEND HUB
-document.querySelectorAll(".button").forEach(input => input.addEventListener('click', function (event) {
-    let user = document.getElementById("nome-usuario").value;
+//SEND VOTE 
+document.querySelectorAll(".btn").forEach(input => input.addEventListener('click', function (event) {
+    let user = document.getElementById("txt-user").value;
     connection.invoke("SendVote", user, this.value);
     event.preventDefault();
 }));
 
-//connection.on("ReceiveVote", function (user, message) {
-//    var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-//    var encodedMsg = user + " says " + msg;
-//    var li = document.createElement("li");
-//    li.textContent = encodedMsg;
-//    document.getElementById("messagesList").appendChild(li);
-//});
+//----------------------------------------------------------------------------------------------------------------------------------------//
 
-//connection.start().then(function () {
-//    document.getElementById("sendButton").disabled = false;
-//}).catch(function (err) {
-//    return console.error(err.toString());
-//});
+//RECEIVE COMMENT 
+connection.on("ReceiveComment", function (user, comment) {
+    var commentDescription = document.createElement("li");
+    commentDescription.textContent = user + ": " + comment;
+    document.getElementById("list-interactions").appendChild(commentDescription);
+});
 
-//document.getElementById("sendButton").addEventListener("click", function (event) {
-//    var user = document.getElementById("userInput").value;
-//    var message = document.getElementById("messageInput").value;
-//    connection.invoke("SendVote", user, message).catch(function (err) {
-//        return console.error(err.toString());
-//    });
-//    event.preventDefault();
-//});
+//SEND COMMENT 
+document.getElementById("btn-send").addEventListener('click', function (event) {
+    let user = document.getElementById("txt-user").value;
+    let comment = document.getElementById("txt-comment").value
+    connection.invoke("SendComment", user, comment);
+    event.preventDefault();
+});
 
+//----------------------------------------------------------------------------------------------------------------------------------------//
+
+//RECEIVE UPDATECHART 
+connection.on("UpdateChart", function (vermelho, azul, amarelo, verde) {
+    colorChart.data.datasets[0].data = [vermelho, azul, amarelo, verde]; 
+    colorChart.update();
+});
 

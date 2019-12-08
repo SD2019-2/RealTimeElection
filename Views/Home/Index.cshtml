@@ -1,14 +1,11 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home page";
 }
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">
 
@@ -16,48 +13,40 @@
 </head>
 
 <body>
-    <div class="row">
+    <div class="row mt-10" style="margin-top:30px; padding:0px 30px">
+
+        @* CHART *@
         <div class="col-6">
             <canvas id="color-chart" width="1000" height="500"></canvas>
         </div>
 
+        @* INPUTS *@
         <div class="col-6">
+            @* NOME *@
             <div>
-                <input type="text" placeholder="Insira seu nome" id="nome-usuario">
+                <label>Nome:</label>
+                <input class="form-control" type="text" placeholder="Insira seu nome" id="txt-user">
             </div>
-            <div>
-                <button id="btn-vermelho" class="button" value="0" style="color:red;"> Vermelho </button>
+            @* BOTOES *@
+            <div style="margin-top:30px">
+                <label>Voto:</label>
+                <div>
+                    <button id="btn-vermelho" class="btn btn-outline-danger" value="0"> Vermelho </button>
+                    <button id="btn-azul" class="btn btn-outline-primary" value="1"> Azul </button>
+                    <button id="btn-amarelo" class="btn btn-outline-warning" value="2"> Amarelo </button>
+                    <button id="btn-verde" class="btn btn-outline-success" value="3"> Verde </button>
+                </div>
             </div>
-            <div>
-                <button id="btn-azul" class="button"  value="1" style="color:blue;"> Azul </button>
-            </div>
-            <div>
-                <button id="btn-amarelo" class="button" value="2" style="color:yellow;"> Amarelo </button>
-            </div>
-            <div>
-                <button id="btn-verde" class="button" value="3" style="color:green;"> Verde </button>
+            @* COMENTARIOS *@
+            <div style="margin-top:30px; width:auto">
+                <label>Comentário:</label>
+                <textarea class="form-control" id="txt-comment" rows="3"></textarea>
+                <button id="btn-send" style="margin-top:10px;" class="btn btn-primary float-right">Enviar</button>
             </div>
         </div>
     </div>
 
-    @*<div class="row">&nbsp;</div>
-        <div class="row">
-            <div class="col-2">User</div>
-            <div class="col-4"><input type="text" id="userInput" /></div>
-        </div>
-        <div class="row">
-            <div class="col-2">Message</div>
-            <div class="col-4"><input type="text" id="messageInput" /></div>
-        </div>
-        <div class="row">&nbsp;</div>
-        <div class="row">
-            <div class="col-6">
-                <input type="button" id="sendButton" value="Send Message" />
-            </div>
-        </div>*@
-
-
-
+    @* DIVISORIA *@
     <div class="row">
         <div class="col-12">
             <hr />
@@ -67,20 +56,17 @@
     @* LISTA DE VOTOS *@
     <div class="row">
         <div class="col-12">
-            <ul id="list-vote"></ul>
+            <ul id="list-interactions"></ul>
         </div>
     </div>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    @* SCRIPTS *@
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/site.js"></script>
-
-
 </body>
 
 
